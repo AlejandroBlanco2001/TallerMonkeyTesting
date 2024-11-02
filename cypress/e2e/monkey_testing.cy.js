@@ -50,81 +50,83 @@ function randomEvent(monkeysLeft) {
         const eventIndex = getRandomInt(0, availableEvents.length);
         const eventType = availableEvents[eventIndex];
 
-        console.log(`Event type: ${eventType}`);
-        console.log(`Index: ${eventIndex}`);
-
         switch (eventType) {
             case "click_link":
-                cy.get("a").then(($links) => {
-                    if ($links.length > 0) {
-                        let randomLink = $links.get(
-                            getRandomInt(0, $links.length)
-                        );
-                        if (!Cypress.dom.isHidden(randomLink)) {
-                            cy.wrap(randomLink).click({ force: true });
-                            monkeysLeft--;
-                        }
+                cy.get("body").then(($body) => {
+                    if ($body.find("a").length) {
+                        cy.get("a").then(($links) => {
+                            if ($links.length > 0) {
+                                let randomLink = $links.get(
+                                    getRandomInt(0, $links.length)
+                                );
+                                if (!Cypress.dom.isHidden(randomLink)) {
+                                    cy.wrap(randomLink).click({ force: true });
+                                    monkeysLeft--;
+                                }
+                            }
+                            cy.wait(1000);
+                            randomEvent(monkeysLeft);
+                        });
                     }
-                    cy.wait(1000);
-                    randomEvent(monkeysLeft);
                 });
                 break;
 
             case "fill_input":
-                cy.get("input").then(($inputs) => {
-                    if ($inputs.length > 0) {
-                        let randomInput = $inputs.get(
-                            getRandomInt(0, $inputs.length)
-                        );
-                        if (!Cypress.dom.isHidden(randomInput)) {
-                            cy.wrap(randomInput).type("Test", { force: true });
-                            monkeysLeft--;
-                        }
+                cy.get("body").then(($body) => {
+                    if ($body.find("input").length) {
+                        cy.get("input").then(($inputs) => {
+                            var randomInput = $inputs.get(
+                                getRandomInt(0, $inputs.length)
+                            );
+                            if (!Cypress.dom.isHidden(randomInput)) {
+                                cy.wrap(randomInput).type("Test", {
+                                    force: true,
+                                });
+                                monkeysLeft--;
+                            }
+                            cy.wait(1000);
+                            randomEvent(monkeysLeft);
+                        });
                     }
-                    cy.wait(1000);
-                    randomEvent(monkeysLeft);
                 });
                 break;
 
             case "select_combo":
-                cy.get("select").then(($selects) => {
-                    if ($selects.length > 0) {
-                        let randomSelect = $selects.get(
-                            getRandomInt(0, $selects.length)
-                        );
-                        if (!Cypress.dom.isHidden(randomSelect)) {
-                            //selcet a random option inside the select
-                            cy.wrap(randomSelect)
-                                .find("option")
-                                .then(($options) => {
-                                    let randomOption = $options.get(
-                                        getRandomInt(0, $options.length)
-                                    );
-                                    cy.wrap(randomSelect).select(
-                                        randomOption.value
-                                    );
-                                    monkeysLeft--;
-                                });
-                        }
+                cy.get("body").then(($body) => {
+                    if ($body.find("select").length) {
+                        cy.get("select").then(($selects) => {
+                            var randomSelect = $selects.get(
+                                getRandomInt(0, $selects.length)
+                            );
+                            cy.wrap(randomSelect).select(
+                                getRandomInt(1, randomSelect.options.length),
+                                { force: true }
+                            );
+                            cy.wait(1000);
+                            randomEvent(monkeysLeft);
+                        });
                     }
-                    cy.wait(1000);
-                    randomEvent(monkeysLeft);
                 });
                 break;
-
             case "click_button":
-                cy.get("button").then(($buttons) => {
-                    if ($buttons.length > 0) {
-                        let randomButton = $buttons.get(
-                            getRandomInt(0, $buttons.length)
-                        );
-                        if (!Cypress.dom.isHidden(randomButton)) {
-                            cy.wrap(randomButton).click({ force: true });
-                            monkeysLeft--;
-                        }
+                cy.get("body").then(($body) => {
+                    if ($body.find("button").length) {
+                        cy.get("button").then(($buttons) => {
+                            if ($buttons.length > 0) {
+                                let randomButton = $buttons.get(
+                                    getRandomInt(0, $buttons.length)
+                                );
+                                if (!Cypress.dom.isHidden(randomButton)) {
+                                    cy.wrap(randomButton).click({
+                                        force: true,
+                                    });
+                                    monkeysLeft--;
+                                }
+                            }
+                            cy.wait(1000);
+                            randomEvent(monkeysLeft);
+                        });
                     }
-                    cy.wait(1000);
-                    randomEvent(monkeysLeft);
                 });
                 break;
 
