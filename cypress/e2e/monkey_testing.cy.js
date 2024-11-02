@@ -1,15 +1,16 @@
 const monkeyConfig = require("../../monkey-config.json");
 
 describe("Los estudiantes under monkeys", function () {
-    it("visits los estudiantes and survives monkeys", function () {
+    it(`visits los estudiantes and survives monkeys (randomClicks = ${monkeyConfig.monkeysClickEventAmount})`, function () {
         cy.visit("https://losestudiantes.co");
         cy.wait(1000);
         randomClick(monkeyConfig.monkeysClickEventAmount);
     });
 
-    it("visits los estudiantes and survives monkeys (randomEvents)", function () {
+    it(`visits los estudiantes and survives monkeys (randomEvents = ${monkeyConfig.monkeysRandomEventAmount})`, function () {
         cy.visit("https://losestudiantes.co");
         cy.wait(1000);
+        console.log(monkeyConfig.monkeysRandomEventAmount);
         randomEvent(monkeyConfig.monkeysRandomEventAmount);
     });
 });
@@ -102,10 +103,11 @@ function randomEvent(monkeysLeft) {
                                 getRandomInt(1, randomSelect.options.length),
                                 { force: true }
                             );
-                            cy.wait(1000);
-                            randomEvent(monkeysLeft);
+                            monkeysLeft--;
                         });
                     }
+                    cy.wait(1000);
+                    randomEvent(monkeysLeft);
                 });
                 break;
             case "click_button":
