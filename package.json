@@ -1,0 +1,15 @@
+{
+  "name": "monkeytaller",
+  "version": "1.0.0",
+  "description": "Esto es una prueba de concepto de monkey testing, en este caso se ha utilizado el lenguaje de programación de JavaScript,\r en este caso cubrimos los casos de clicks aleatorios y de eventos aleatorios en la pagina de web https://losestudiantes.co, para la materia Pruebas automatizadas de software de la Universidad de los Andes para la maestria de ingenieria de software.",
+  "main": "index.js",
+  "devDependencies": {
+    "cypress": "^13.15.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress-test-monkeys": "cypress run --spec cypress/integration/monkeytaller.spec.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
