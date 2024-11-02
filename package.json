@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "cypress-test-monkeys": "cypress run --spec cypress/integration/monkeytaller.spec.js"
+    "cypress-test-monkeys": "cypress run --spec cypress/e2e/monkey_testing.cy.js"
   },
   "author": "",
   "license": "ISC"
