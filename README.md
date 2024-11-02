@@ -15,6 +15,14 @@ Dentro del archivo `monkey-config.json` se encuentran las configuraciones para e
 - "monkeysClickEventAmount": Cantidad de clicks aleatorios que se realizaran.
 - "monkeysRandomEventAmount": Cantidad de eventos aleatorios que se realizaran.
 
+```js
+// Parametros por defecto
+{
+    "monkeysClickEventAmount": 10,
+    "monkeysRandomEventAmount": 1
+}
+```
+
 >[!IMPORTANT]
 >Para que el monkey testing funcione correctamente, se debe tener en cuenta que la pagina de web https://losestudiantes.co debe estar disponible.
 
